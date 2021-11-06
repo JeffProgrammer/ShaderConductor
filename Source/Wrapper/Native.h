@@ -36,6 +36,8 @@ struct SourceDescription
     const char* source;
     const char* entryPoint;
     ShaderStage stage;
+    const MacroDefine* defines;
+    uint32_t numDefines;
 };
 
 struct ShaderModel

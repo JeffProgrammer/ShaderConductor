@@ -36,8 +36,8 @@ void Compile(SourceDescription* source, OptionsDescription* optionsDesc, TargetD
     sourceDesc.source = source->source;
     sourceDesc.stage = source->stage;
     sourceDesc.fileName = nullptr;
-    sourceDesc.defines = nullptr;
-    sourceDesc.numDefines = 0;
+    sourceDesc.defines = source->defines;
+    sourceDesc.numDefines = source->numDefines;
 
     Compiler::Options options;
     options.packMatricesInRowMajor = optionsDesc->packMatricesInRowMajor;
