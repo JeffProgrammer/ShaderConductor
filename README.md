@@ -1,8 +1,20 @@
 # ShaderConductor
 
-[![Build Status](https://dev.azure.com/msft-ShaderConductor/public/_apis/build/status/ShaderConductor-CI)](https://dev.azure.com/msft-ShaderConductor/public/_build/latest?definitionId=1)
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
+This is a fork of Microsoft's ShaderConductor for use in the Torque3D game engine.
 
+Windows 10 x64 and MacOS Apple Silicon is currently supported. Linux x64 is assumed to be working, but not currently tested.
+
+Planned Support is having this compile for desktops only, as we plan on only shipping translation of shaders with the engine itself, and not for the actual games produced. As such, there is no need for other targets in support. The desktop of the engine can simply compile the shaders for the target platform when creating the game.
+
+Note when building for XCode currently, you need to specify the toolchain option (-T) buildsystem=1 Currently it will not build with the new XCode build system. As of XCode 13.1, the old system is still working.
+
+For Torque3D, we require only GLSL translation at the moment. Metal will also be required once we implement a metal backend.
+
+All modifications related for Torque3D are also released under the MIT license.
+
+# README from Microsoft
+
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
 ShaderConductor is a tool designed for cross-compiling HLSL to other shading languages.
 
