@@ -20,24 +20,3 @@ target_link_libraries(${DLL_NAME}
 add_dependencies(${DLL_NAME} ShaderConductor)
 
 set_target_properties(${DLL_NAME} PROPERTIES FOLDER "Wrapper")
-
-set(CSHARP_TEST CSharpPinvoke)
-
-set(SOURCE_FILES
-    Program.cs
-    Wrapper.cs    
-)
-
-set(DATA_FILES
-    shader.hlsl 
-)
-
-set_source_files_properties(${DATA_FILES}
-    PROPERTIES VS_TOOL_OVERRIDE "None"    
-    		   VS_COPY_TO_OUT_DIR "PreserveNewest"
-)
-
-add_executable(${CSHARP_TEST} ${SOURCE_FILES} ${DATA_FILES})
-add_dependencies(${CSHARP_TEST} ShaderConductorWrapper)
-
-set_target_properties(${CSHARP_TEST} PROPERTIES FOLDER "Wrapper")

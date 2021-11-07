@@ -84,7 +84,7 @@ struct DisassembleDescription
     int binarySize;
 };
 
-#define DLLEXPORT extern "C" __declspec(dllexport)
+#define DLLEXPORT extern "C" SC_SYMBOL_EXPORT
 
 DLLEXPORT void Compile(SourceDescription* source, OptionsDescription* optionsDesc, TargetDescription* target, ResultDescription* result);
 DLLEXPORT void Disassemble(DisassembleDescription* source, ResultDescription* result);
