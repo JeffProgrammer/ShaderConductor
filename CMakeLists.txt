@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.19)
 
 if(WIN32 AND (${CMAKE_GENERATOR} MATCHES "Visual Studio ([^9]|[9][0-9])") AND (NOT SC_CLANGFORMAT))
     set(SC_WITH_CSHARP ON)
@@ -14,6 +14,13 @@ project(${PROJECT_NAME})
 if(SC_WITH_CSHARP)
     project(${PROJECT_NAME} LANGUAGES CSharp)
     set(CMAKE_CSharp_FLAGS "/langversion:7")
+endif()
+
+if (CMAKE_GENERATOR STREQUAL Xcode)
+    if (CMAKE_XCODE_BUILD_SYSTEM EQUAL 12)
+        message("Error. Project only supports legacy XCode Build System. specify -T buildsystem=1 when generating project")
+        return()
+    endif()
 endif()
 
 set(SC_MAJOR_VERSION 0)
@@ -41,7 +48,7 @@ if (CMAKE_C_COMPILER_ID MATCHES Clang)
     endforeach()
 endif()
 
-set(Python_ADDITIONAL_VERSIONS 3.5 3.6 3.7 3.8)
+set(Python_ADDITIONAL_VERSIONS 3.5 3.6 3.7 3.8 3.9)
 
 if(SC_CLANGFORMAT)
     find_program(CLANG_FORMAT
@@ -91,7 +98,9 @@ if(WIN32)
     endif()
 else()
     if(NOT SC_ARCH_NAME)
-        if((CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64") OR (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64"))
+        if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
+            set(SC_ARCH_NAME "arm64")
+        elseif((CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64") OR (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64"))
             set(SC_ARCH_NAME "x64")
         else()
             set(SC_ARCH_NAME "x86")
